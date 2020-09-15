@@ -1,0 +1,90 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/publico">GerShop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <ul class="navbar-nav mr-auto">
+        
+      <ng-container *ngIf="!authService.comprobarIngreso()">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/ingresar" routerLinkActive="active">Ingresar<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registrar" routerLinkActive="active">Registrar</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="authService.comprobarIngreso();">
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="authService.cerrarSesion()">Salir</a>
+          </li>
+        </ng-container>
+    </ul>
+
+  
+  <!--div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" *ngFor="let menu of modeloMenu; let i = index" dropdown>
+        <a dropdownToggle class="nav-link dropdown-toggle"  id={{modeloMenu[i]._id}} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="modeloMenu[i].padre==0">
+          {{modeloMenu[i].menu}} 
+        </a>
+        <div *ngFor="let menu2 of modeloMenu; let j = index">
+          <ul *dropdownMenu class="dropdown-menu" >
+          <a class="dropdown-item" href="#" >{{modeloMenu[j].menu}}</a>
+          </ul> 
+        </div>
+      </li>
+      
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div-->
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" *ngFor="let menu of modeloMenu; let i = index" dropdown>
+        <div *ngIf='modeloMenu[i].padre == "0"'>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id={{modeloMenu[i]._id}} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="modeloMenu[i].padre==0">
+            {{modeloMenu[i].menu}} 
+          </a>
+        </div>
+        <div *ngIf='modeloMenu[i].padre != "0"'>
+          <div *ngFor="let menu2 of modeloMenu; let j = index">
+            <div *ngIf='"modeloMenu[j].padre" == "2"'>
+              <ul *dropdownMenu class="dropdown-menu" >
+                <a class="dropdown-item" href="#" >{{modeloMenu[j].menu}}</a>
+              </ul>                
+            </div>
+          </div>
+        </div>
+
+      </li>
+      
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+  
+</nav>
+
+
+
+
+<!--a *ngFor="let menu of modeloMenu; let i = index" mat-list-item routerLinkActive="active-list-item"></a>
+
+
+<div class="langBox" *ngFor="let menu of modeloMenu; let i = index">
+  <p>{{modeloMenu[i].menu}}</p>
+</div-->
+
+<div class="container p-5">
+  <router-outlet></router-outlet>
+</div>
+
